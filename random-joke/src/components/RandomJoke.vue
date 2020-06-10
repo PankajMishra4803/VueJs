@@ -9,7 +9,7 @@
             <label><span class="list-group-item-text"><i class="fa fa-fw"></i> {{joke.joke}}</span>&nbsp;<input type="checkbox" :id="joke.id" :value="joke.joke" v-model="favoriteJokes"></label></div>
         </div>
     </div>
-     <p v-bind:class="favoriteJokes.length > 0 ? 'verLine': ''"></p>
+     <!-- <p v-bind:class="favoriteJokes.length > 0 ? 'verLine': ''"></p>
      <div v-if="favoriteJokes.length > 0" v-bind:class="favoriteJokes.length > 0 ? 'joke-fav-list': ''">
       <h1>Favorite Jokes</h1>
        <ul v-for="(favoriteJoke, i) in favoriteJokes" v-bind:key="i">
@@ -19,7 +19,7 @@
          </li>
          
       </ul>
-     </div>
+     </div> -->
   </div>
 </template>
 <script>
@@ -43,18 +43,12 @@ export default {
   mounted() {
     axios
       .get("https://api.icndb.com/jokes/random/10")
-      .then(response => (this.jokeData = response.data.value));
-      this.favoriteJokesStorage = localStorage.getItem('favoriteJoke')
-    
+      .then(response => (this.jokeData = response.data.value)); 
   },
   methods:{
     savefavoriteJoke: function(newFavorite){
       this.oldLocalVal = newFavorite;
       localStorage.setItem('favoriteJoke',JSON.stringify(this.oldLocalVal))
-    },
-    removeJoke: function(removeJoke){
-     console.log(removeJoke);
-     this.favoriteJokes.splice(this.favoriteJokes.indexOf(removeJoke), 1);
     }
   }
 };
